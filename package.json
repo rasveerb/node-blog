@@ -1,0 +1,19 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "A simple node express app to submit blog posts",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rasveerb/node-blog.git"
+  },
+  "author": "Rasveer Bansi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rasveerb/node-blog/issues"
+  },
+  "homepage": "https://github.com/rasveerb/node-blog#readme"
+}

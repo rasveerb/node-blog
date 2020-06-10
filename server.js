@@ -1,19 +1,23 @@
 var express = require('express');
-var app = express();
+var formidable = require('express-formidable');
 
-//routes specific image to a specific path
-app.use("/frank",express.static('public/quitefrankly logo.png'));
+var app = express();
 
 //adds in all static content in public folder
 app.use(express.static('public'));
+//routes specific image to a specific path
+app.use("/frank",express.static('public/quitefrankly logo.png'));
+
+app.use(formidable());
 
 //serves the html page when you hit localhost
 app.get("/", function(req,res){
   res.sendFile(process.cwd() + "/public/index.html");
 });
+
 //POST method
 app.post("/create-post", function(req,res){
-  console.log("/create-post");
+  console.log(req.fields);
 })
 
 app.get("/about", function(req, res){

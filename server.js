@@ -1,3 +1,5 @@
+//TODO make a thank you submissions page when clicked submit
+//TODO get all recent posts to show as soon as you click submit
 var express = require('express');
 var formidable = require('express-formidable');
 var fs = require('fs');
@@ -6,6 +8,7 @@ var app = express();
 
 var postsArray = [];
 var dataObject = {};
+const timestamp = Date.now();
 
 
 //adds in all static content in public folder
@@ -27,37 +30,25 @@ app.get("/about", function(req, res){
 //POST method
 app.post("/create-post", function(req,res){
 
-  dataObject = {"timestamp" : req.fields.blogpost};
+  //TODO change the blogpost to include the Date.now() as the key and post as the value
+console.log("timestamp: ", timestamp);
+
+  dataObject = { timestamp : req.fields.blogpost};
+
+  console.log ("data object: ", dataObject);
+
   postsArray.push(dataObject);
 
-  // for(i=0;i<postsArray.length;i++){
-  //   console.log("in for loop", i);
   fs.writeFile(__dirname + '/data/posts.json', JSON.stringify(postsArray), function(error){ //maybe try append file and read out an array somehow
     if(error) throw(error);
   });
 
-  // }
-
-  // console.log("submitted post", req.fields);
-  console.log("posts array inside ", postsArray);
+  fs.readFile(__dirname + '/data/posts.json', function(error,file){
+    var parsedFile = JSON.parse(file);
+    console.log("read file inside POST: " ,parsedFile);
+  });
 
 });
-
-
-
-
-  // fs.readFile(__dirname + '/data/posts.json', function(error,file){
-  //   var parsedFile = JSON.parse(file);
-  //   console.log("read file inside POST: " ,parsedFile);
-  // });
-
-  // console.log("submitted post", req.fields);
-  console.log("posts array outside ", postsArray);
-
-
-//TODO write the array to the posts.json
-
-//TODO change the blogpost to include the Date.now() as the key and post as the value
 
 // //method which writes data to the hard drive - NEED TO REFACTOR
 // fs.writeFile(__dirname + '/data/posts.json',JSON.stringify({"2020210": "test blog post"}, null, 2), function(error){ //__dirname = global node object - gives path to current working directory
@@ -65,10 +56,10 @@ app.post("/create-post", function(req,res){
 // });
 //
 // //method which reads data that's already there
-// fs.readFile(__dirname + '/data/posts.json', function(error,file){
-//   var parsedFile = JSON.parse(file);
-//   console.log("read file: " ,parsedFile);
-// });
+fs.readFile(__dirname + '/data/posts.json', function(error,file){
+  var parsedFile = JSON.parse(file);
+  console.log("read file: " ,parsedFile);
+});
 
 app.listen(3000, function(){
   console.log('Server is now listening on port 3000. Ready to accept requests!');

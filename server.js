@@ -35,7 +35,7 @@ app.post("/create-post", function(req, res) {
 //Array of blog posts
   postsArray.push(dataObject);
 
-  fs.writeFile(__dirname + '/data/posts.json', JSON.stringify(postsArray), function(error) { //maybe try append file and read out an array somehow
+  fs.writeFile(__dirname + '/data/posts.json', JSON.stringify(postsArray), function(error) {
     if (error) throw (error);
   });
 
@@ -43,6 +43,8 @@ app.post("/create-post", function(req, res) {
     var parsedFile = JSON.parse(file);
     console.log("read file inside POST: ", parsedFile);
   });
+
+  res.json({ posts: postsArray}); //need to change to a sucessful submission page
 
 });
 

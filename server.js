@@ -32,7 +32,6 @@ app.post("/create-post", function(req, res) {
     [Date.now()]: req.fields.blogpost
   };
 
-//Array of blog posts
   postsArray.push(dataObject);
 
   fs.writeFile(__dirname + '/data/posts.json', JSON.stringify(postsArray), function(error) {
@@ -41,17 +40,19 @@ app.post("/create-post", function(req, res) {
 
   fs.readFile(__dirname + '/data/posts.json', function(error, file) {
     var parsedFile = JSON.parse(file);
-    console.log("read file inside POST: ", parsedFile);
   });
 
-  res.json({ posts: postsArray}); //need to change to a sucessful submission page
-
+  res.json({ posts: postsArray}); //TODO need to change to a sucessful submission page - not sure if todo is needed with step 10
+//TODO make the above line into a pop up maybe??
 });
 
-// //method which reads data that's already there
-fs.readFile(__dirname + '/data/posts.json', function(error, file) {
-  var parsedFile = JSON.parse(file);
-  console.log("read file: ", parsedFile);
+//links to script.js to show recent posts
+//TODO get it to show recent posts
+//TODO get it to only call logo and title part once and append recent posts
+app.get("/get-posts", function(req, res){
+  res.sendFile(process.cwd() + "/data/posts.json");
+
+  // console.log("scripts debugger: " + "/data/posts.json");
 });
 
 app.listen(3000, function() {

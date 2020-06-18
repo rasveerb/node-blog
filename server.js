@@ -1,5 +1,6 @@
 //TODO get all recent posts to show as soon as you click submit
 //TODO research if refactoring with appendFile is better or not
+//TODO refactor all vars to lets
 var express = require('express');
 var formidable = require('express-formidable');
 var fs = require('fs');
@@ -49,10 +50,13 @@ app.post("/create-post", function(req, res) {
 //links to script.js to show recent posts
 //TODO get it to show recent posts
 //TODO get it to only call logo and title part once and append recent posts
+//TODO get it to clear on refresh
 app.get("/get-posts", function(req, res){
   res.sendFile(process.cwd() + "/data/posts.json");
 
   // console.log("scripts debugger: " + "/data/posts.json");
+
+  //TODO try forloop again but i < array.length
 });
 
 app.listen(3000, function() {

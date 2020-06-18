@@ -65,9 +65,10 @@ function addBlogpostsToPage (data) {
             var thumbnail       = document.createElement('img');
             var postContainer   = document.querySelector('.post-container');
 
+
             thumbnail.src = "./howlsCastle.jpeg";
             thumbnail.className = "thumbnail";
-            postText.innerHTML = data[blogpost];
+            postText.innerHTML = JSON.stringify(data[blogpost]);
             postDiv.className = "post";
 
             postDiv.appendChild(thumbnail);

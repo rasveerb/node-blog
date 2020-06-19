@@ -61,17 +61,22 @@ function addBlogpostsToPage (data) {
         if (data.hasOwnProperty(blogpost)) {
 
             var postDiv         = document.createElement('div');
+            var postDate        = document.createElement('p');
             var postText        = document.createElement('p');
             var thumbnail       = document.createElement('img');
             var postContainer   = document.querySelector('.post-container');
 
+            const blogpostDate = new Date(parseInt(Object.keys(data[blogpost])[0])); //TODO find out what these do
+            const blogpostText = Object.values(data[blogpost])[0];
 
             thumbnail.src = "./howlsCastle.jpeg";
             thumbnail.className = "thumbnail";
-            postText.innerHTML = JSON.stringify(data[blogpost]);
+            postDate.innerText = blogpostDate;
+            postText.innerHTML = blogpostText;
             postDiv.className = "post";
 
             postDiv.appendChild(thumbnail);
+            postDiv.appendChild(postDate);
             postDiv.appendChild(postText);
             postContainer.appendChild(postDiv);
         }
